@@ -4,7 +4,6 @@ import io
 import datetime
 import xlsxwriter
 
-
 class ReportXlsxController(http.Controller):
 
     @http.route('/download/xlsx/report/<string:date_from>/<string:date_to>', type='http', auth='user')
