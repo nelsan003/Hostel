@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_department,student.department,model_student_department,,1,1,1,1
+access_language_info,language.info,model_language_info,,1,1,1,1
+access_mark_info,mark.info,model_mark_info,,1,1,1,1
+access_student_leave,student.leave,model_student_leave,,1,1,1,1
+access_my_partner,my.partner,model_my_partner,,1,1,1,1
+access_my_sequence,my.sequence,model_my_sequence,,1,1,1,1
+access_student_bloodgroup,bloodgroup.info,model_bloodgroup_info,,1,1,1,1
+access_blood_group_update,blood.group.update,model_blood_group_update,,1,1,1,1
+access_student_list_update,student.list.update,model_student_list_update,,1,1,1,1
+access_student_leave_report,student.leave.report,model_student_leave_report,,1,1,1,1
+access_student_send_mail,student.send.mail,model_student_send_mail,,1,1,1,1
+
+
+
+access_student_profile,student.all,model_student_profile,group_student,1,0,0,0
+access_student_profile_admin,student.all,model_student_profile,base.group_erp_manager,1,1,1,1

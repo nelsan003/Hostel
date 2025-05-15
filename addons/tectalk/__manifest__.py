@@ -1,0 +1,28 @@
+{
+    'name': 'Tectalk',
+    'version': '1.3',
+    'summary': 'Maintain College management data',
+    'sequence': 10,
+    'description': """
+    """,
+    'category': 'Accounting/Accounting',
+    'website': 'https://www.odoo.com/app/invoicing',
+    'depends': [],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/leave.xml',
+        'data/mark.xml',
+        'views/menu.xml',
+        'views/student_view.xml',
+        'views/department.xml',
+        'views/attendence.xml',
+        'views/marks.xml',
+        'views/wizard.xml',
+        'views/exam.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'assets': {},
+    'license': 'LGPL-3',
+}

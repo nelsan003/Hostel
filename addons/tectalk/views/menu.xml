@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+          <menuitem id="tech_talk_main_menu"
+            name="TechTalk"
+            sequence="1"
+          />
+    </data>
+</odoo>

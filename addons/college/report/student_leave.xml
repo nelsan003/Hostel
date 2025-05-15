@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+
+        <record id="student_basic_details" model="ir.actions.report">
+            <field name="name">Student Basic Details</field>
+            <field name="model">student.profile</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">college.student_report_termplate</field>
+            <field name="report_file">college.student_report_termplate</field>
+            <field name="binding_view_types">list</field>
+            <field name="binding_model_id" ref="model_student_profile"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <template id="student_report_termplate">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="page-break-after: always">
+                        <div class="row">
+                           <div class="col-12 text-center h4">
+                                Student Basic Details
+                           </div>
+                       </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+
+        <record id="action_student_leave_report" model="ir.actions.report">
+            <field name="name">Student Leave</field>
+            <field name="model">student.leave</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">college.report_student_leave</field>
+            <field name="report_file">college.report_student_leave</field>
+        </record>
+
+        <template id="report_student_leave">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                   <div class="row">
+                       <div class="col-12 text-center h4">
+                            Student Leave
+                       </div>
+                   </div>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                Date From : <t t-esc="o.date_from.strftime('%d-%m-%Y')"/>
+                            </div>
+                            <div class="col-6 float-right">
+                                Date To : <t t-esc="o.date_to.strftime('%d-%m-%Y')"/>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-stripped">
+                        <thead class="text-center">
+                            <th class="text-center" width="20%">S.No</th>
+                            <th class="text-center" width="40%">Student Name</th>
+                            <th class="text-center" width="20%">Roll No</th>
+                            <th class="text-center" width="20%">Reason</th>
+                        </thead>
+                        <t t-set="s_no" t-value="1" />
+                        <tbody>
+                            <t t-foreach="result" t-as="res">
+                                <tr>
+                                    <td class="text-center"><t t-esc="s_no"/></td>
+                                    <td><t t-esc="res.student_id.name"/></td>
+                                    <td class="text-center"><t t-esc="res.student_id.roll_nb"/></td>
+                                    <td><t t-esc="res.reason"/></td>
+                                </tr>
+                                <t t-set="s_no" t-value="s_no + 1" />
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,178 @@
+<odoo>
+    <data>
+
+        <!-- Success Page Template -->
+        <template id="student_mark_success" name="Student Mark Success">
+            <t t-call="web.layout">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                        crossorigin="anonymous"/>
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="alert alert-success text-center shadow-sm p-4 rounded">
+                                <h3 class="mb-3">
+                                    <i class="fa fa-check-circle text-success mr-2"></i>
+                                    Action Successful
+                                </h3>
+                                <p>Your request has been processed successfully.</p>
+                                <a href="/students/mark" class="btn btn-primary mt-3">
+                                    <i class="fa fa-home mr-1"></i>
+                                    Return to Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!-- Student Mark List Template -->
+        <template id="student_mark_list">
+            <t t-call="web.layout">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                      crossorigin="anonymous"/>
+                <div class="container mt-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <a href="/students/mark/form" class="btn btn-success mb-3">Create New Mark</a>
+                            <h3 class="card-title mb-4 text-center bg-success text-white p-2">Student Mark List</h3>
+                            <table class="table table-striped table-bordered">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Student Name</th>
+                                        <th>Subject</th>
+                                        <th>Mark</th>
+                                        <th>Delete</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <t t-set="s_no" t-value="1"/>
+                                <tbody>
+                                    <t t-foreach="data" t-as="res">
+                                        <tr>
+                                            <td class="text-center">
+                                                <t t-esc="s_no"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="res['student']"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-esc="res['subject']"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-esc="res['mark']"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <a t-attf-href="/students/mark/delete/{{ res['id'] }}"
+                                                   class="text-danger"
+                                                   title="Delete">
+                                                    Delete
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a t-attf-href="/students/mark/edit/{{ res['id'] }}"
+                                                   class="text-primary"
+                                                   title="Edit">
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <t t-set="s_no" t-value="s_no + 1"/>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="student_mark_form_template">
+            <t t-call="web.layout">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                      crossorigin="anonymous"/>
+                <div class="container mt-5">
+                    <h2 class="mb-4">Student Mark Request</h2>
+
+                    <!-- Display error if exists -->
+                    <t t-if="error">
+                        <div class="alert alert-danger">
+                            <t t-esc="error"/>
+                        </div>
+                    </t>
+
+                    <form action="/students/mark/submit" method="post">
+                        <div class="form-group">
+                            <label for="student_id">Select Student</label>
+                            <select name="student_id" class="form-control" required="1">
+                                <t t-foreach="students" t-as="student">
+                                    <option t-att-value="student.id"
+                                            t-att-selected="old_data.get('student_id') == student.id if old_data else None">
+                                        <t t-esc="student.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="subject">Subject</label>
+                            <input type="text" name="subject" required="1" class="form-control"
+                                   t-att-value="old_data.get('subject') if old_data else ''"/>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="mark">Mark</label>
+                            <textarea name="mark" required="1" class="form-control">
+                                <t t-esc="old_data.get('mark') if old_data else ''"/>
+                            </textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
+                </div>
+            </t>
+        </template>
+
+
+        <!-- Student Mark Edit Template -->
+        <template id="student_mark_edit_template">
+            <t t-call="web.layout">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                      crossorigin="anonymous"/>
+                <div class="container mt-5">
+                    <h2>Edit Student Mark</h2>
+                    <form t-att-action="'/students/mark/update/%d' % mark.id" method="post">
+                        <div class="form-group">
+                            <label>Select Student</label>
+                            <select name="student_id" class="form-control" required="1">
+                                <t t-foreach="students" t-as="student">
+                                    <option t-att-value="student.id" t-att-selected="student.id == mark.student_id.id">
+                                        <t t-esc="student.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Subject</label>
+                            <input type="text" name="subject" t-att-value="mark.subject" class="form-control"
+                                   required="1"/>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Mark</label>
+                            <textarea name="mark" class="form-control" required="1">
+                                <t t-esc="mark.mark"/>
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                    </form>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

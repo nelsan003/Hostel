@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tectalk_student,access_tectalk_student,model_tectalk_student,,1,1,1,1
+access_department_info,access_department_info,model_department_info,,1,1,1,1
+access_attendence_info,access_attendence_info,model_attendence_info,,1,1,1,1
+access_student_mark_user,access.student.mark.user,model_school_student_mark,base.group_user,1,1,1,1
+access_exam_info,access_exam_info,model_exam_info,,1,1,1,1
+access_my_simple_wizard,my.simple.wizard,model_my_simple_wizard,,1,1,1,1
+access_student_department_update_wizard,student.department.update.wizard,model_student_department_update_wizard,,1,1,1,1

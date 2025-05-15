@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--     Todo list form view -->
+    <record id="student_profile_xml" model="ir.ui.view">
+        <field name="name">student.profile.form</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="redirect_youtube_link" string="Send Email" class="btn btn-primary" type="object" />
+                    <button name="%(action_mark)d"
+                        type="action"
+                        class="btn btn-primary"
+                        context="{'default_student_id': id}">
+                        View Mark
+                    </button>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="dob"/>
+                            <field name="uid"/>
+                            <field name="age" readonly="1"/>
+                            <field name="department_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="programme_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blood_group_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="image"/>
+                            <field name="gender"/>
+                            <field name="roll_nb"/>
+                            <field name="language_ids" options="{'no_open': True, 'no_create': True}"
+                                   widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Mark">
+                            <field name="mark_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="mark"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    Todo list list view-->
+    <record id="todo_list_view" model="ir.ui.view">
+        <field name="name">todo.list.view</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="department_id"/>
+                <field name="age"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="student_profile_kanbak" model="ir.ui.view">
+        <field name="name">lstudent.profile.kanban</field>
+        <field name="model">student.profile</field>
+        <field name="priority">5</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="code"/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full d-none d-md-block">
+                            <field name="image" widget="image" alt="Product Image"/>
+                        </aside>
+                        <main>
+                            <li>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </li>
+                            <footer class="pt-0 mt-0">
+                                <field name="name" class="text-muted"/>
+                            </footer>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- todo list action -->
+    <record id="action_student_profile" model="ir.actions.act_window">
+        <field name="name">Student Profile</field>
+        <field name="res_model">student.profile</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+
+    <menuitem id="menu_student_profile" parent="profile_main_menu" action="action_student_profile" sequence="1"/>
+
+
+    <record id="department_list_view" model="ir.ui.view">
+        <field name="name">student.department.view</field>
+        <field name="model">student.department</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- todo list action -->
+    <record id="action_student_department" model="ir.actions.act_window">
+        <field name="name">Department</field>
+        <field name="res_model">student.department</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_department" parent="profile_main_menu" action="action_student_department" sequence="2"/>
+
+
+
+
+
+
+<!--    <record id="programme_list_view_inherited__" model="ir.ui.view">-->
+<!--        <field name="name">programme.info.list</field>-->
+<!--        <field name="model">programme.info</field>-->
+<!--        <field name="mode">primary</field>-->
+<!--        <field name="inherit_id" ref="programme.programme_list_view"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="proamme_inherited_id" model="ir.ui.view">
+        <field name="name">programme.info.listinherit.hr</field>
+        <field name="model">programme.info</field>
+        <field name="inherit_id" ref="programme.programme_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="type" />
+            </xpath>
+            <xpath expr="//field[@name='code']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="studnent_profile_client_action" model="ir.actions.client">
+        <field name="name">Student Profile</field>
+        <field name="tag">college.student_profile</field>
+    </record>
+
+
+    <menuitem id="client_action_profile" parent="profile_main_menu" action="studnent_profile_client_action" sequence="10" />
+
+</odoo>

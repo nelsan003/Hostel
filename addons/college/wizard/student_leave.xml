@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="student_leave_wizard_from_view" model="ir.ui.view">
+        <field name="name">student.leave.report.form</field>
+        <field name="model">student.leave.report</field>
+        <field name="arch" type="xml">
+            <form string="Simple Wizard">
+                <group>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_pdf"
+                            string="Print"
+                            type="object"
+                            class="btn-primary"/>
+                    <button name="print_xlsx"
+                            string="Print XLSX"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_student_leave" model="ir.actions.act_window">
+        <field name="name">Student Leave</field>
+        <field name="res_model">student.leave.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_student_leave"
+              name="Student Leave"
+              parent="report_main_menu"
+              action="action_student_leave"/>
+
+</odoo>
+
+

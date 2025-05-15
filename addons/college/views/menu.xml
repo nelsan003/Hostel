@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="main_menu_student_profile"
+        name="College"
+        sequence="1"
+    />
+
+    <menuitem id="profile_main_menu" name="Profile" parent="main_menu_student_profile" sequence="1" />
+    <menuitem id="activity_main_menu" name="Activity" parent="main_menu_student_profile" sequence="2" />
+    <menuitem id="report_main_menu" name="Report" parent="main_menu_student_profile" sequence="3" />
+
+    <menuitem id="configuarion_main_menu" name="Configuration" parent="main_menu_student_profile" sequence="4" />
+
+</odoo>

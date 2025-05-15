@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="leave_form_view" model="ir.ui.view">
+            <field name="name">attendence.info.form</field>
+            <field name="model">attendence.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,rejected"/>
+                        <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
+                        <button name="action_reject" type="object" string="Reject" class="btn-danger"/>
+                        <button name="action_reset" type="object" string="Reset to Draft" class="btn-secondary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="date"/>
+                                <field name="date_to"/>
+                                <field name="reason"/>
+                                <field name="duration"/>
+                                <field name="color" widget="color"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- List View -->
+        <record id="leave_list_view" model="ir.ui.view">
+            <field name="name">attendence.info.view</field>
+            <field name="model">attendence.info</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="student_id"/>
+                    <field name="date"/>
+                    <field name="date_to"/>
+                    <field name="reason"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Calendar View -->
+        <record model="ir.ui.view" id="leave_calendar_view">
+            <field name="model">attendence.info</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar
+                        date_start="date"
+                        date_stop="date_to"
+                        mode="month"
+                        date_delay="duration"
+                        event_open_popup="true"
+                        quick_create="true"
+                        color="color"
+                        event_limit="2"
+                >
+                    <field name="student_id" filters="1"/>
+                    <field name="reason"/>
+                    <field name="date"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_leave" model="ir.actions.act_window">
+            <field name="name">Attendence</field>
+            <field name="res_model">attendence.info</field>
+            <field name="view_mode">list,form,calendar</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_attendence" parent="tech_talk_main_menu" action="action_leave" sequence="7"/>
+    </data>
+</odoo>
+

@@ -1,0 +1,23 @@
+{
+  "George": [
+    {
+      "subject": "Tamil",
+      "mark": 10,
+      "max_mark": 100
+    },
+    {
+      "subject": "Math",
+      "mark": 90,
+      "max_mark": 100
+    }
+  ],
+  "Mary": [
+    {
+      "subject": "Science",
+      "mark": 95,
+      "max_mark": 100
+    }
+  ]
+}
+
+

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <record id="blood_group_a" model="bloodgroup.info">
+            <field name="name">A Positive</field>
+            <field name="group">A+</field>
+        </record>
+        <record id="blood_group_a_" model="bloodgroup.info">
+            <field name="name">A Negativerr</field>
+            <field name="group">A-</field>
+        </record>
+
+
+        <record id="my_sequernce_id" model="ir.sequence">
+            <field name="name">Sample Sequence</field>
+            <field name="prefix">s</field>
+            <field name="padding">5</field>
+        </record>
+
+
+    </data>
+</odoo>
